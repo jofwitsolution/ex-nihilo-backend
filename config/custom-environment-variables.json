@@ -1,0 +1,12 @@
+{
+    "jwtPrivateKey": "JWT_SECRET",
+    "db": "MONGO_URI",
+    "env": "NODE_ENV",
+    "port": "PORT",
+    "user": "USER",
+    "pass": "PASS",
+    "clientId": "CLIENT_ID",
+    "clientSecret": "CLIENT_SECRET",
+    "redirecturi": "REDIRECT_URI",
+    "refreshToken": "REFRESH_TOKEN"
+}
