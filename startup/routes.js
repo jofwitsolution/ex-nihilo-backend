@@ -4,6 +4,7 @@ const { errorHandler, notFound } = require("../middleware/errorMiddleware");
 const userRoutes = require("../routes/userRoutes");
 const emailRoutes = require("../routes/emailRoutes");
 const courseRoutes = require("../routes/courseRoutes");
+const homepageRoute = require("../routes/homepage");
 
 module.exports = function (app) {
   app.use(express.json());
@@ -14,6 +15,7 @@ module.exports = function (app) {
       credentials: true,
     })
   );
+  app.use("/", homepageRoute);
   app.use("/api/users", userRoutes);
   app.use("/api/email", emailRoutes);
   app.use("/api/courses", courseRoutes);
