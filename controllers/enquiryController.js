@@ -39,13 +39,15 @@ const receiveGeneralEnquiry = async (req, res) => {
       Location: ${currentLocation} \n
       Student type: ${studentType} \n
       \n
-      ${additionalNotes}`;
+      ${additionalNotes} \n
+      \n
+      Ex-Nihilo Care Services and Consultancy`;
 
   // console.log(text);
 
   let mailOptions = {
-    from: `Ex-Nihilo <didomiconsortium@gmail.com>`,
-    to: "didomiconsortium@gmail.com",
+    from: `Ex-Nihilo <exnihilocareservices@gmail.com>`,
+    to: "exnihilocareservices@gmail.com",
     subject: "General Enquiry",
     text: text,
   };
@@ -108,13 +110,15 @@ const receiveCourseEnquiry = async (req, res) => {
       Course title: ${course} \n
       Start time: ${startTime} \n
       \n
-      ${additionalNotes}`;
+      ${additionalNotes}\n
+      \n
+      Ex-Nihilo Care Services and Consultancy`;
 
   // console.log(text);
 
   let mailOptions = {
-    from: `Ex-Nihilo <didomiconsortium@gmail.com>`,
-    to: "didomiconsortium@gmail.com",
+    from: `Ex-Nihilo <exnihilocareservices@gmail.com>`,
+    to: "exnihilocareservices@gmail.com",
     subject: "Course Enquiry",
     text: text,
   };
