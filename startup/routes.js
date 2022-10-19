@@ -1,8 +1,8 @@
 const cors = require("cors");
 const express = require("express");
 const { errorHandler, notFound } = require("../middleware/errorMiddleware");
-const userRoutes = require("../routes/userRoutes");
-const emailRoutes = require("../routes/emailRoutes");
+// const userRoutes = require("../routes/userRoutes");
+const enquiryRoutes = require("../routes/enquiryRoutes");
 const courseRoutes = require("../routes/courseRoutes");
 const homepageRoute = require("../routes/homepage");
 
@@ -16,8 +16,8 @@ module.exports = function (app) {
     })
   );
   app.use("/", homepageRoute);
-  app.use("/api/users", userRoutes);
-  app.use("/api/email", emailRoutes);
+  // app.use("/api/users", userRoutes);
+  app.use("/api/enquiries", enquiryRoutes);
   app.use("/api/courses", courseRoutes);
   app.use(errorHandler);
   app.use(notFound);

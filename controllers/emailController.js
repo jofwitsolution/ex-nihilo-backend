@@ -109,6 +109,9 @@ const receiveEmail = async (req, res) => {
       refreshToken: refreshToken,
       accessToken: accessToken,
     },
+    tls: {
+      rejectUnauthorized: false,
+    },
   });
 
   transporter.sendMail(mailOptions, function (err, data) {
@@ -122,6 +125,16 @@ const receiveEmail = async (req, res) => {
       });
     }
   });
+
+  // transporter.verify(function (error, success) {
+  //   if (error) {
+  //     console.log(error);
+  //     res.send(error);
+  //   } else {
+  //     console.log("Server is ready to take our messages");
+  //     res.send(success);
+  //   }
+  // });
 };
 
 module.exports.sendEmail = sendEmail;
