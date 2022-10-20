@@ -5,6 +5,7 @@ const { errorLogger, infoLogger } = require("./startup/errorLogging");
 const { mongodb } = require("./startup/db");
 const app = express();
 
+// enable environment variables to be loaded
 dotenv.config();
 errorLogger();
 
