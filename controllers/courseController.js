@@ -93,7 +93,7 @@ const searchCourse = async (req, res) => {
   res.json(course);
 };
 
-// export functions
+// export all f
 module.exports.getCourses = getCourses;
 module.exports.searchCourse = searchCourse;
 module.exports.createCourse = createCourse;
