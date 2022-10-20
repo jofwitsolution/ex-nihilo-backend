@@ -6,7 +6,8 @@ const { infoLogger } = require("./errorLogging");
 const conn = mongoose.connection;
 
 module.exports.mongodb = function () {
-  const db = config.get("db");
+  // const db = config.get("db");
+  const db = process.env.MONGO_URI;
 
   mongoose.connect(db, {
     useUnifiedTopology: true,

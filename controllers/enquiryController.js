@@ -2,12 +2,19 @@ const config = require("config");
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
 
-const user = config.get("user");
-const pass = config.get("pass");
-const clientId = config.get("clientId");
-const clientSecret = config.get("clientSecret");
-const refreshToken = config.get("refreshToken");
-const redirecturi = config.get("redirecturi");
+// const user = config.get("user");
+// const pass = config.get("pass");
+// const clientId = config.get("clientId");
+// const clientSecret = config.get("clientSecret");
+// const refreshToken = config.get("refreshToken");
+// const redirecturi = config.get("redirecturi");
+
+const user = process.env.USER;
+const pass = process.env.PASS;
+const clientId = process.env.CLIENT_ID;
+const clientSecret = process.env.CLIENT_SECRET;
+const refreshToken = process.env.REFRESH_TOKEN;
+const redirecturi = process.env.REDIRECT_URI;
 
 const oAuth2Client = new google.auth.OAuth2(
   clientId,
