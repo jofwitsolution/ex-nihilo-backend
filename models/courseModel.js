@@ -67,6 +67,18 @@ const courseSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    scholarshipBursaries: {
+      type: String,
+      trim: true,
+    },
+    paymentPlan: {
+      type: String,
+      trim: true,
+    },
+    studentFinance: {
+      type: String,
+      trim: true,
+    },
     video: {
       type: Object,
       trim: true,

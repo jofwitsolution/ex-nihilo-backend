@@ -93,8 +93,25 @@ const searchCourse = async (req, res) => {
   res.json(course);
 };
 
-// export all f
+// @desc Filter Course
+// @route GET /api/courses/filterby/:field?keyword=value
+// @access Public
+const filterCourse = async (req, res) => {
+  const field = req.params.field;
+  const keyword = req.query.keyword
+    ? {
+        $regex: req.query.keyword,
+        $options: "i",
+      }
+    : {};
+
+  let courses = await Course.find({ [field]: { ...keyword } });
+
+  res.json(courses);
+};
+
 module.exports.getCourses = getCourses;
 module.exports.searchCourse = searchCourse;
 module.exports.createCourse = createCourse;
 module.exports.getCourse = getCourse;
+module.exports.filterCourse = filterCourse;
