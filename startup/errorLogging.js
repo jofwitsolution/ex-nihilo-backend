@@ -2,7 +2,7 @@ require("express-async-errors");
 const winston = require("winston");
 const config = require("config");
 
-const db = config.get("db");
+// const db = config.get("db");
 
 module.exports.errorLogger = function () {
   const logger = winston.createLogger({
