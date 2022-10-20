@@ -8,9 +8,9 @@ const app = express();
 dotenv.config();
 errorLogger();
 
-if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
-}
+// if (process.env.NODE_ENV === "development") {
+//   app.use(morgan("dev"));
+// }
 
 require("./startup/routes")(app);
 mongodb();
