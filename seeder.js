@@ -5,6 +5,9 @@ const users = require("./data/users");
 const { Course } = require("./models/courseModel");
 const { User } = require("./models/userModel");
 const { mongodb } = require("./startup/db");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 require("./startup/config")();
 
