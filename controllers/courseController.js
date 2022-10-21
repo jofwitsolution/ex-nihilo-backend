@@ -44,10 +44,19 @@ const createCourse = async (req, res) => {
 // @route GET /api/courses
 // @access Public
 const getCourses = async (req, res) => {
-  let courses = await Course.find({}).select("-__v");
+  const pageSize = 10;
+  const page = Number(req.query.pageNumber) || 1; // current page
 
-  // console.log(universities);
-  res.json(courses);
+  const count = await Course.countDocuments({});
+  let courses = await Course.find({})
+    .select("-__v -about")
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+
+  // console.log(courses);
+  const pages = Math.ceil(count / pageSize); //total pages
+  const hasNextPage = page < pages;
+  res.json({ courses, page, pages, hasNextPage });
 };
 
 // @desc Get Course
@@ -94,20 +103,30 @@ const searchCourse = async (req, res) => {
 };
 
 // @desc Filter Course
-// @route GET /api/courses/filterby/:field?keyword=value
+// @route GET /api/courses/filterby/:field?selection=selection&pageNumber=page
 // @access Public
 const filterCourse = async (req, res) => {
+  const pageSize = 10;
+  const page = Number(req.query.pageNumber) || 1; // current page
+
   const field = req.params.field;
-  const keyword = req.query.keyword
+  const selection = req.query.selection
     ? {
-        $regex: req.query.keyword,
+        $regex: req.query.selection,
         $options: "i",
       }
     : {};
 
-  let courses = await Course.find({ [field]: { ...keyword } });
+  const count = await Course.countDocuments({ [field]: { ...selection } });
+  let courses = await Course.find({ [field]: { ...selection } })
+    .select("-__v -about")
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
 
-  res.json(courses);
+  console.log(count);
+  const pages = Math.ceil(count / pageSize); //total pages
+  const hasNextPage = page < pages;
+  res.json({ courses, page, pages, hasNextPage });
 };
 
 module.exports.getCourses = getCourses;
