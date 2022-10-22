@@ -81,25 +81,46 @@ const getCourse = async (req, res) => {
 };
 
 // @desc Search Course
-// @route GET /api/courses/search
+// @route GET /api/courses/search?keyword=keyword&pageNumber=page
 // @access Public
 const searchCourse = async (req, res) => {
-  console.log(req.query.keyword);
+  const pageSize = 6;
+  const page = Number(req.query.pageNumber) || 1; // current page
+
+  // console.log(req.query.keyword);
   const keyword = req.query.keyword
     ? {
         $regex: req.query.keyword,
         $options: "i",
       }
-    : {};
+    : {
+        $regex: "_",
+        $options: "i",
+      };
 
-  // let universities = await Universities.find({
-  //   "schools.name": { ...keyword },
-  // }).select("-__v");
+  const count = await Course.countDocuments({
+    $or: [
+      { title: { ...keyword } },
+      { levelOfStudy: { ...keyword } },
+      { institution: { ...keyword } },
+      { location: { ...keyword } },
+    ],
+  });
+  let courses = await Course.find({
+    $or: [
+      { title: { ...keyword } },
+      { levelOfStudy: { ...keyword } },
+      { institution: { ...keyword } },
+      { location: { ...keyword } },
+    ],
+  })
+    .select("-__v -about")
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
 
-  let course = await Course.find({ title: { ...keyword } });
-
-  // console.log(universities);
-  res.json(course);
+  const pages = Math.ceil(count / pageSize); //total pages
+  const hasNextPage = page < pages;
+  res.json({ courses, page, pages, hasNextPage, totalCourses: count });
 };
 
 // @desc Filter Course
@@ -115,7 +136,7 @@ const filterCourse = async (req, res) => {
         $regex: req.query.selection,
         $options: "i",
       }
-    : {};
+    : { $regex: "_", $options: "i" };
 
   const count = await Course.countDocuments({ [field]: { ...selection } });
   let courses = await Course.find({ [field]: { ...selection } })
