@@ -44,7 +44,7 @@ const createCourse = async (req, res) => {
 // @route GET /api/courses
 // @access Public
 const getCourses = async (req, res) => {
-  const pageSize = 10;
+  const pageSize = 6;
   const page = Number(req.query.pageNumber) || 1; // current page
 
   const count = await Course.countDocuments({});
@@ -56,7 +56,7 @@ const getCourses = async (req, res) => {
   // console.log(courses);
   const pages = Math.ceil(count / pageSize); //total pages
   const hasNextPage = page < pages;
-  res.json({ courses, page, pages, hasNextPage });
+  res.json({ courses, page, pages, hasNextPage, totalCourses: count });
 };
 
 // @desc Get Course
@@ -106,7 +106,7 @@ const searchCourse = async (req, res) => {
 // @route GET /api/courses/filterby/:field?selection=selection&pageNumber=page
 // @access Public
 const filterCourse = async (req, res) => {
-  const pageSize = 10;
+  const pageSize = 6;
   const page = Number(req.query.pageNumber) || 1; // current page
 
   const field = req.params.field;
@@ -123,10 +123,10 @@ const filterCourse = async (req, res) => {
     .limit(pageSize)
     .skip(pageSize * (page - 1));
 
-  console.log(count);
+  // console.log(count);
   const pages = Math.ceil(count / pageSize); //total pages
   const hasNextPage = page < pages;
-  res.json({ courses, page, pages, hasNextPage });
+  res.json({ courses, page, pages, hasNextPage, totalCourses: count });
 };
 
 module.exports.getCourses = getCourses;
