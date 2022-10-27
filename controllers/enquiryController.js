@@ -53,8 +53,9 @@ const receiveGeneralEnquiry = async (req, res) => {
   // console.log(text);
 
   let mailOptions = {
-    from: `Ex-Nihilo <exnihilocareservices@gmail.com>`,
-    to: "exnihilocareservices@gmail.com",
+    from: `Ex-Nihilo Care Services and Consultancy <exnihilocareservices@gmail.com>`,
+    to: "info@ex-nihilocareservicesandconsultancy.com",
+
     subject: "General Enquiry",
     text: text,
   };
@@ -124,8 +125,9 @@ const receiveCourseEnquiry = async (req, res) => {
   // console.log(text);
 
   let mailOptions = {
-    from: `Ex-Nihilo <exnihilocareservices@gmail.com>`,
-    to: "exnihilocareservices@gmail.com",
+    from: `Ex-Nihilo Care Services and Consultancy <exnihilocareservices@gmail.com>`,
+    to: "info@ex-nihilocareservicesandconsultancy.com",
+
     subject: "Course Enquiry",
     text: text,
   };
