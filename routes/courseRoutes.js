@@ -7,7 +7,6 @@ const {
   searchCourse,
   filterCourse,
 } = require("../controllers/courseController");
-const { protect, admin } = require("../middleware/authMiddleware");
 
 router.route("/").get(getCourses).post(createCourse);
 router.get("/search", searchCourse);

@@ -1,8 +1,6 @@
 require("express-async-errors");
 const winston = require("winston");
-const config = require("config");
 
-// const db = config.get("db");
 const db = process.env.MONGO_URI;
 
 module.exports.errorLogger = function () {

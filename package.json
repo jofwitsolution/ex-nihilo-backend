@@ -1,7 +1,7 @@
 {
-  "name": "didomi",
+  "name": "ex-nihilo",
   "version": "1.0.0",
-  "description": "Backend of Didomi Company Limited",
+  "description": "Backend of Ex-Nihilo care services",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

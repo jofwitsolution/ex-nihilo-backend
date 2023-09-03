@@ -1,5 +1,3 @@
-const config = require("config");
-const winston = require("winston");
 const mongoose = require("mongoose");
 const { infoLogger } = require("./errorLogging");
 

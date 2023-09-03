@@ -1,27 +1,9 @@
-const config = require("config");
 const nodemailer = require("nodemailer");
-const { google } = require("googleapis");
 
-// const user = config.get("user");
-// const pass = config.get("pass");
-// const clientId = config.get("clientId");
-// const clientSecret = config.get("clientSecret");
-// const refreshToken = config.get("refreshToken");
-// const redirecturi = config.get("redirecturi");
-
-const user = process.env.USER;
-const pass = process.env.PASS;
-const clientId = process.env.CLIENT_ID;
-const clientSecret = process.env.CLIENT_SECRET;
-const refreshToken = process.env.REFRESH_TOKEN;
-const redirecturi = process.env.REDIRECT_URI;
-
-const oAuth2Client = new google.auth.OAuth2(
-  clientId,
-  clientSecret,
-  redirecturi
-);
-oAuth2Client.setCredentials({ refresh_token: refreshToken });
+const user = process.env.SMTP_MAIL;
+const pass = process.env.SMTP_PASSWORD;
+const port = process.env.SMTP_PORT;
+const host = process.env.SMTP_HOST;
 
 // @desc Receive General Enquiry
 // @route POST /api/enquiries/general
@@ -60,21 +42,12 @@ const receiveGeneralEnquiry = async (req, res) => {
     text: text,
   };
 
-  const accessToken = await oAuth2Client.getAccessToken();
-
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host,
+    port,
     auth: {
-      type: "OAuth2",
-      user: user,
-      pass: pass,
-      clientId: clientId,
-      clientSecret: clientSecret,
-      refreshToken: refreshToken,
-      accessToken: accessToken,
-    },
-    tls: {
-      rejectUnauthorized: false,
+      user,
+      pass,
     },
   });
 
@@ -132,21 +105,12 @@ const receiveCourseEnquiry = async (req, res) => {
     text: text,
   };
 
-  const accessToken = await oAuth2Client.getAccessToken();
-
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host,
+    port,
     auth: {
-      type: "OAuth2",
-      user: user,
-      pass: pass,
-      clientId: clientId,
-      clientSecret: clientSecret,
-      refreshToken: refreshToken,
-      accessToken: accessToken,
-    },
-    tls: {
-      rejectUnauthorized: false,
+      user,
+      pass,
     },
   });
 
